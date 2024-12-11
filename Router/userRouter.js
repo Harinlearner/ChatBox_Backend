@@ -33,30 +33,30 @@ route.put('/update/:id',(req,res)=>{
 });
 route.post('/addConvo',(req,res)=>{
     const {person1,person2} = req.body;
+    messDate.create({person1:person1,person2:person2,convo:[
+        {person:person1,personConvo:"Hi"}
+    ]})
+    .then((cons)=>res.status(200).json(cons.data));   
+    console.log("Selected");
     // let flag=[];
-    messDate.find({
-        $or :
-            [
-                { person1: person1,person2:person2 },
-                { person1: person2,person2:person1 }
-            ]
-    })
-    .then((data)=>{
-        if(data.length==0)
-        {
-            messDate.create({person1:person1,person2:person2,convo:[
-                {person:person1,personConvo:"Hi"}
-            ]})
-            .then((cons)=>res.status(200).json(cons.data));   
-        }
-        else{
-            res.status(500).json({message:"Error"});
-        }
-    });
-    // console.log(flag.length);
-    // if(flag)
-    // {
-    //     console.log(flag);
+    // messDate.find({
+    //     $or :
+    //     [
+    //         { person1: person1,person2:person2 },
+    //         { person1: person2,person2:person1 }
+    //     ]
+    // })
+    // .then((data)=>{
+    //     if(data.length==0)
+    //         {
+    //             console.log(person1+" "+person2);
+           
+    //     }
+    //     else{
+    //         res.status(500).json({message:"Error"});
+    //     }
+    // });
+   
     
 });
 route.get('/contactFetch',(req,res)=>{

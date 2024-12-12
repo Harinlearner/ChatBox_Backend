@@ -39,23 +39,6 @@ route.post('/addConvo',(req,res)=>{
     .then((cons)=>res.status(200).json(cons.data));   
     console.log("Selected");
     // let flag=[];
-    // messDate.find({
-    //     $or :
-    //     [
-    //         { person1: person1,person2:person2 },
-    //         { person1: person2,person2:person1 }
-    //     ]
-    // })
-    // .then((data)=>{
-    //     if(data.length==0)
-    //         {
-    //             console.log(person1+" "+person2);
-           
-    //     }
-    //     else{
-    //         res.status(500).json({message:"Error"});
-    //     }
-    // });
    
     
 });

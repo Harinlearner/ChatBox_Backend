@@ -1,5 +1,6 @@
 import messDate from '../Models/userModels.js';
-import contactUser from '../Models/userContactData.js'
+import contactUser from '../Models/userContactData.js';
+import logData from '../Models/logModel.js';
 export const create = async(req,res)=>{
     try{
     const userDetails = new messDate(req.body);
@@ -24,7 +25,8 @@ export const fetch = async(req,res) => {
 export const login = async(req,res)=>{
    try
    {
-        const {username,password} = req.body;
+        const {username,password, day} = req.body;
+        logData.create({username:username,dateAndTime:day});
         const userDet = await contactUser.find({username,password});
         if(userDet.length==0)
             return res.status(401).json({message:"Invalid data"});

@@ -1,4 +1,5 @@
 import express from "express";
+import logData from "../Models/logModel.js";
 import messDate from '../Models/userModels.js';
 import contactUser from '../Models/userContactData.js';
 import mongoose from 'mongoose';
@@ -6,6 +7,20 @@ import {login, register} from '../Controller/userController.js'
 const ObjectId = mongoose.Types.ObjectId;
 const route = express.Router();
 import {create} from '../Controller/userController.js'
+
+route.post("/removelog",(req,res)=>{
+    const {userName} = req.body;
+    console.log(userName);
+    logData.deleteMany({username:userName})
+    .then((data)=>res.json(data))
+    .catch((err)=>res.status.json(err));
+});
+route.get('/fetchlog/:day',(req,res)=>{
+    const {day} = req.params;
+    logData.find({dateAndTime:day})
+    .then((log)=>{console.log(log);res.json(log)})
+    .catch((err)=>res.status.json(err));
+});
 route.post('/create',create);
 route.get('/fetch/:userName',(req,res)=>{
     const {userName}=req.params;
